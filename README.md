@@ -16,6 +16,20 @@ If you want to learn how to create reusable PHP packages yourself, take a look a
 composer require jackmartin/laravel-websockets
 ```
 
+## Service provider
+```shell
+php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="migrations"
+```
+```shell
+php artisan migrate
+```
+
+## WebSocket configuration
+```shell
+php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"
+```
+
+
 ## Documentation
 
 For installation instructions, in-depth usage and deployment details, please take a look at the [official documentation](https://docs.beyondco.de/laravel-websockets/).

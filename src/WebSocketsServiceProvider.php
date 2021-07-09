@@ -26,16 +26,16 @@ class WebSocketsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/websockets.php' => config_path('websockets.php'),
+            __DIR__ . '/../config/websockets.php' => config_path('websockets.php'),
         ], 'config');
 
         $this->mergeConfigFrom(
-            __DIR__.'/../config/websockets.php', 'websockets'
+            __DIR__ . '/../config/websockets.php', 'websockets'
         );
 
         $this->publishes([
-            __DIR__.'/../database/migrations/0000_00_00_000000_create_websockets_statistics_entries_table.php' => database_path('migrations/0000_00_00_000000_create_websockets_statistics_entries_table.php'),
-            __DIR__.'/../database/migrations/0000_00_00_000000_rename_statistics_counters.php' => database_path('migrations/0000_00_00_000000_rename_statistics_counters.php'),
+            __DIR__ . '/../database/migrations/0000_00_00_000000_create_websockets_statistics_entries_table.php' => database_path('migrations/0000_00_00_000000_create_websockets_statistics_entries_table.php'),
+            __DIR__ . '/../database/migrations/0000_00_00_000000_rename_statistics_counters.php'                 => database_path('migrations/0000_00_00_000000_rename_statistics_counters.php'),
         ], 'migrations');
 
         $this->registerAsyncRedisQueueDriver();
@@ -82,13 +82,13 @@ class WebSocketsServiceProvider extends ServiceProvider
     {
         $this->app->singleton(StatisticsStore::class, function ($app) {
             $config = $app['config']['websockets'];
-            $class = $config['statistics']['store'];
+            $class  = $config['statistics']['store'];
 
             return new $class;
         });
 
         $this->app->singleton(StatisticsCollector::class, function ($app) {
-            $config = $app['config']['websockets'];
+            $config          = $app['config']['websockets'];
             $replicationMode = $config['replication']['mode'] ?? 'local';
 
             $class = $config['replication']['modes'][$replicationMode]['collector'];
@@ -104,7 +104,7 @@ class WebSocketsServiceProvider extends ServiceProvider
      */
     protected function registerDashboard()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'websockets');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'websockets');
 
         $this->registerDashboardRoutes();
         $this->registerDashboardGate();
@@ -159,9 +159,9 @@ class WebSocketsServiceProvider extends ServiceProvider
     protected function registerDashboardRoutes()
     {
         Route::group([
-            'domain' => config('websockets.dashboard.domain'),
-            'prefix' => config('websockets.dashboard.path'),
-            'as' => 'laravel-websockets.',
+            'domain'     => config('websockets.dashboard.domain'),
+            'prefix'     => config('websockets.dashboard.path'),
+            'as'         => 'laravel-websockets.',
             'middleware' => config('websockets.dashboard.middleware', [AuthorizeDashboard::class]),
         ], function () {
             Route::get('/', ShowDashboard::class)->name('dashboard');

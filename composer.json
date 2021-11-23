@@ -29,7 +29,7 @@
         }
     ],
     "require": {
-        "cboden/ratchet": "^0.4.1",
+        "jackmartin/ratchet": "^0.4.1",
         "clue/redis-react": "^2.3",
         "doctrine/dbal": "^2.9",
         "evenement/evenement": "^2.0|^3.0",

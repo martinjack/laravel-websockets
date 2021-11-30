@@ -35,10 +35,10 @@ class Router
         $this->routes = new RouteCollection;
 
         $this->customRoutes = [
-            'get' => new Collection,
-            'post' => new Collection,
-            'put' => new Collection,
-            'patch' => new Collection,
+            'get'    => new Collection,
+            'post'   => new Collection,
+            'put'    => new Collection,
+            'patch'  => new Collection,
             'delete' => new Collection,
         ];
     }
@@ -70,7 +70,7 @@ class Router
      */
     public function registerRoutes()
     {
-        $this->get('/app/{appKey}', config('websockets.handlers.websocket'));
+        $this->get(config('websockets.websocket_path', '/app/{appKey}'), config('websockets.handlers.websocket'));
         $this->post('/apps/{appId}/events', config('websockets.handlers.trigger_event'));
         $this->get('/apps/{appId}/channels', config('websockets.handlers.fetch_channels'));
         $this->get('/apps/{appId}/channels/{channelName}', config('websockets.handlers.fetch_channel'));
@@ -192,8 +192,8 @@ class Router
     protected function getRoute(string $method, string $uri, $action): Route
     {
         $action = is_subclass_of($action, MessageComponentInterface::class)
-            ? $this->createWebSocketsServer($action)
-            : app($action);
+        ? $this->createWebSocketsServer($action)
+        : app($action);
 
         return new Route($uri, ['_controller' => $action], [], [], null, [], [$method]);
     }

@@ -9,15 +9,15 @@ return [
     |
     | You can configure the dashboard settings from here.
     |
-    */
+     */
 
-    'dashboard' => [
+    'dashboard'              => [
 
-        'port' => env('LARAVEL_WEBSOCKETS_PORT', 6001),
+        'port'       => env('LARAVEL_WEBSOCKETS_PORT', 6001),
 
-        'domain' => env('LARAVEL_WEBSOCKETS_DOMAIN'),
+        'domain'     => env('LARAVEL_WEBSOCKETS_DOMAIN'),
 
-        'path' => env('LARAVEL_WEBSOCKETS_PATH', 'laravel-websockets'),
+        'path'       => env('LARAVEL_WEBSOCKETS_PATH', 'laravel-websockets'),
 
         'middleware' => [
             'web',
@@ -26,7 +26,7 @@ return [
 
     ],
 
-    'managers' => [
+    'managers'               => [
 
         /*
         |--------------------------------------------------------------------------
@@ -40,7 +40,7 @@ return [
         | anytime implement the same interface as the class and add your own
         | custom method to retrieve the apps.
         |
-        */
+         */
 
         'app' => \BeyondCode\LaravelWebSockets\Apps\ConfigAppManager::class,
 
@@ -59,24 +59,26 @@ return [
     | You can apply multiple settings, like the maximum capacity, enable
     | client-to-client messages or statistics.
     |
-    */
+     */
 
-    'apps' => [
+    'apps'                   => [
         [
-            'id' => env('PUSHER_APP_ID'),
-            'name' => env('APP_NAME'),
-            'host' => env('PUSHER_APP_HOST'),
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
-            'path' => env('PUSHER_APP_PATH'),
-            'capacity' => null,
+            'id'                     => env('PUSHER_APP_ID'),
+            'name'                   => env('APP_NAME'),
+            'host'                   => env('PUSHER_APP_HOST'),
+            'key'                    => env('PUSHER_APP_KEY'),
+            'secret'                 => env('PUSHER_APP_SECRET'),
+            'path'                   => env('PUSHER_APP_PATH'),
+            'capacity'               => null,
             'enable_client_messages' => false,
-            'enable_statistics' => true,
-            'allowed_origins' => [
+            'enable_statistics'      => true,
+            'allowed_origins'        => [
                 // env('LARAVEL_WEBSOCKETS_DOMAIN'),
             ],
         ],
     ],
+
+    'websocket_path'         => env('LARAVEL_WEBSOCKET_PATH'),
 
     /*
     |--------------------------------------------------------------------------
@@ -90,11 +92,11 @@ return [
     | like Redis to ensure connection between multiple instances of
     | WebSocket servers. Just set the driver to 'redis' to enable the PubSub using Redis.
     |
-    */
+     */
 
-    'replication' => [
+    'replication'            => [
 
-        'mode' => env('WEBSOCKETS_REPLICATION_MODE', 'local'),
+        'mode'  => env('WEBSOCKETS_REPLICATION_MODE', 'local'),
 
         'modes' => [
 
@@ -106,7 +108,7 @@ return [
             | Local replication is actually a null replicator, meaning that it
             | is the default behaviour of storing the connections into an array.
             |
-            */
+             */
 
             'local' => [
 
@@ -118,7 +120,7 @@ return [
                 | The channel manager is responsible for storing, tracking and retrieving
                 | the channels as long as their members and connections.
                 |
-                */
+                 */
 
                 'channel_manager' => \BeyondCode\LaravelWebSockets\ChannelManagers\LocalChannelManager::class,
 
@@ -131,15 +133,15 @@ return [
                 | storing them until they will become dumped into another database, usually
                 | a MySQL database or a time-series database.
                 |
-                */
+                 */
 
-                'collector' => \BeyondCode\LaravelWebSockets\Statistics\Collectors\MemoryCollector::class,
+                'collector'       => \BeyondCode\LaravelWebSockets\Statistics\Collectors\MemoryCollector::class,
 
             ],
 
             'redis' => [
 
-                'connection' => env('WEBSOCKETS_REDIS_REPLICATION_CONNECTION', 'default'),
+                'connection'      => env('WEBSOCKETS_REDIS_REPLICATION_CONNECTION', 'default'),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -149,7 +151,7 @@ return [
                 | The channel manager is responsible for storing, tracking and retrieving
                 | the channels as long as their members and connections.
                 |
-                */
+                 */
 
                 'channel_manager' => \BeyondCode\LaravelWebSockets\ChannelManagers\RedisChannelManager::class,
 
@@ -162,9 +164,9 @@ return [
                 | storing them until they will become dumped into another database, usually
                 | a MySQL database or a time-series database.
                 |
-                */
+                 */
 
-                'collector' => \BeyondCode\LaravelWebSockets\Statistics\Collectors\RedisCollector::class,
+                'collector'       => \BeyondCode\LaravelWebSockets\Statistics\Collectors\RedisCollector::class,
 
             ],
 
@@ -172,7 +174,7 @@ return [
 
     ],
 
-    'statistics' => [
+    'statistics'             => [
 
         /*
         |--------------------------------------------------------------------------
@@ -183,9 +185,9 @@ return [
         | be dumped. This is a much reliable store and will be used to display
         | graphs or handle it later on your app.
         |
-        */
+         */
 
-        'store' => \BeyondCode\LaravelWebSockets\Statistics\Stores\DatabaseStore::class,
+        'store'                             => \BeyondCode\LaravelWebSockets\Statistics\Stores\DatabaseStore::class,
 
         /*
         |--------------------------------------------------------------------------
@@ -195,9 +197,9 @@ return [
         | Here you can specify the interval in seconds at which
         | statistics should be logged.
         |
-        */
+         */
 
-        'interval_in_seconds' => 60,
+        'interval_in_seconds'               => 60,
 
         /*
         |--------------------------------------------------------------------------
@@ -207,7 +209,7 @@ return [
         | When the clean-command is executed, all recorded statistics older than
         | the number of days specified here will be deleted.
         |
-        */
+         */
 
         'delete_statistics_older_than_days' => 60,
 
@@ -221,7 +223,7 @@ return [
     | The maximum request size in kilobytes that is allowed for
     | an incoming WebSocket request.
     |
-    */
+     */
 
     'max_request_size_in_kb' => 250,
 
@@ -235,19 +237,19 @@ return [
     | for the private key.
     | You will need to restart the server for the settings to take place.
     |
-    */
+     */
 
-    'ssl' => [
+    'ssl'                    => [
 
-        'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
+        'local_cert'        => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null),
 
-        'capath' => env('LARAVEL_WEBSOCKETS_SSL_CA', null),
+        'capath'            => env('LARAVEL_WEBSOCKETS_SSL_CA', null),
 
-        'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
+        'local_pk'          => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null),
 
-        'passphrase' => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
+        'passphrase'        => env('LARAVEL_WEBSOCKETS_SSL_PASSPHRASE', null),
 
-        'verify_peer' => env('APP_ENV') === 'production',
+        'verify_peer'       => env('APP_ENV') === 'production',
 
         'allow_self_signed' => env('APP_ENV') !== 'production',
 
@@ -263,21 +265,21 @@ return [
     | original class and implement your own logic, alongside
     | with the existing logic.
     |
-    */
+     */
 
-    'handlers' => [
+    'handlers'               => [
 
-        'websocket' => \BeyondCode\LaravelWebSockets\Server\WebSocketHandler::class,
+        'websocket'      => \BeyondCode\LaravelWebSockets\Server\WebSocketHandler::class,
 
-        'health' => \BeyondCode\LaravelWebSockets\Server\HealthHandler::class,
+        'health'         => \BeyondCode\LaravelWebSockets\Server\HealthHandler::class,
 
-        'trigger_event' => \BeyondCode\LaravelWebSockets\API\TriggerEvent::class,
+        'trigger_event'  => \BeyondCode\LaravelWebSockets\API\TriggerEvent::class,
 
         'fetch_channels' => \BeyondCode\LaravelWebSockets\API\FetchChannels::class,
 
-        'fetch_channel' => \BeyondCode\LaravelWebSockets\API\FetchChannel::class,
+        'fetch_channel'  => \BeyondCode\LaravelWebSockets\API\FetchChannel::class,
 
-        'fetch_users' => \BeyondCode\LaravelWebSockets\API\FetchUsers::class,
+        'fetch_users'    => \BeyondCode\LaravelWebSockets\API\FetchUsers::class,
 
     ],
 
@@ -292,8 +294,8 @@ return [
     | intercept values by the promises throughout the app, like in testing
     | to switch from async to sync.
     |
-    */
+     */
 
-    'promise_resolver' => \React\Promise\FulfilledPromise::class,
+    'promise_resolver'       => \React\Promise\FulfilledPromise::class,
 
 ];
